@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -31,7 +31,7 @@ export class Login {
     return this.miForm.get('password');
   }
 
-  loginError: string | null = null;
+  loginError = signal<string | null>(null);
 
   async accion() {
     if(this.miForm.invalid)
@@ -47,7 +47,7 @@ export class Login {
     const error = await this.authService.loguear(this.miForm.value);
 
     if (error) {
-      this.loginError = error;
+      this.loginError.set(error);
       return;
     }
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -46,7 +46,7 @@ export class Registro {
     return this.miForm.get('password');
   }
 
-  registroError: string | null = null;
+  registroError = signal<string | null>(null);
   
   async accion() {
     if(this.miForm.invalid)
@@ -62,7 +62,7 @@ export class Registro {
     const error = await this.authService.registrar(this.miForm.value);
 
     if (error) {
-      this.registroError = error;
+      this.registroError.set(error);
       return;
     }
 

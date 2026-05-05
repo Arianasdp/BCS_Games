@@ -16,19 +16,21 @@ export class AuthService {
 
   usuarioActual: WritableSignal<User | null> = signal<User | null>(null);
 
+  router = inject(Router);
+
   constructor() {
     this.supabase = createClient(this.supabaseUrl, this.publishableKey);
 
-    this.supabase.auth.getUser().then((response) => {
-      if(response.error)
-      {
-        console.log(response.error);
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      const user = session?.user;
+      this.usuarioActual.set(user ?? null);
+
+      if (user) {
+        this.router.navigateByUrl("");
+      } else {
+        this.router.navigateByUrl("/auth/login");
       }
-      else
-      {
-        this.usuarioActual.set(response.data.user);
-      }
-    })
+    });
   }
 
   async registrar ({email, password, nombre, apellido, edad} : IRegistro): Promise<string | null> {
@@ -53,12 +55,8 @@ export class AuthService {
 
       return 'No se pudo registrar el usuario';
     }
-    else
-    {
-      console.log(response.data);
-      this.usuarioActual.set(response.data.user);
+    
       return null;
-    }
   }
 
   async loguear ({email, password} : ILogin):  Promise<string | null>  {
@@ -78,20 +76,11 @@ export class AuthService {
 
         return 'Error al iniciar sesión';
     }
-    else
-    {
-      console.log(response.data);
-      this.usuarioActual.set(response.data.user);
+    
       return null;
-    }
-
   }
 
-  router = inject(Router);
-
-  cerrarSesion () {
-    this.supabase.auth.signOut();
-    this.usuarioActual.set(null);
-    this.router.navigateByUrl("/auth/login");
+  async cerrarSesion () {
+    await this.supabase.auth.signOut();
   }
 }

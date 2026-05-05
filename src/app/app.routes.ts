@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { estaLogueadoGuard } from './guards/esta-logueado-guard';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {
         path: 'games',
         loadChildren: () =>
-            import('./games/game.routes').then(m => m.gameRoutes)
+            import('./games/game.routes').then(m => m.gameRoutes),
+        canActivate: [estaLogueadoGuard]
     }
 ];

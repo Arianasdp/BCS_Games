@@ -124,8 +124,8 @@
                 <p class="error">Mínimo 8 caracteres</p>
                 }
 
-                @if (registroError) {
-                    <p class="error">{{ registroError }}</p>
+                @if (registroError()) {
+                    <p class="error">{{ registroError() }}</p>
                 }
 
                 <div class="btn">

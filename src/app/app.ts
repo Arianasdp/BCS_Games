@@ -9,7 +9,7 @@ import { AuthService } from './auth/auth.service';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('BCS-games');
-
   authS = inject(AuthService);
+  
+  protected readonly title = signal('BCS-games');
 }

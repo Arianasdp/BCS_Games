@@ -33,8 +33,8 @@
                     <p class="error">La contraseña es obligatoria</p>
                 }
 
-                @if (loginError) {
-                    <p class="error">{{ loginError }}</p>
+                @if (loginError()) {
+                    <p class="error">{{ loginError() }}</p>
                 }
 
                 <div class="btn">
