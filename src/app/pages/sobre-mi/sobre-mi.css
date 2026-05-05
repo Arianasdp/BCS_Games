@@ -1,0 +1,151 @@
+.page {
+    padding-top: 60px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: auto 1fr;
+    
+}
+
+.top {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.bottom {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex: 1;
+}
+
+.card-profile,
+.card-rules,
+.card-preview {
+    border-radius: 15px;
+    background-color: #441951;
+    margin: 10px;
+}
+
+/* card-profile */
+.card-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.detalles {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    margin: 10px;
+}
+
+h2,
+h3,
+p {
+    color: #fff;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil img {
+    width: 90%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px #020217;
+}
+
+.perfil img:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* socials */
+.card {
+    width: fit-content;
+    height: fit-content;
+    background-color: #020217;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 25px;
+    gap: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+    border-radius: 15px;
+}
+
+/* for all social containers*/
+.socialContainer {
+    width: 52px;
+    height: 52px;
+    background-color: #441951;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+    border-radius: 15px;
+}
+
+/* github*/
+.containerOne:hover {
+    background-color: #1b1f23;
+    transition-duration: .3s;
+}
+
+/* linkdin*/
+.containerTwo:hover {
+    background-color: #0072b1;
+    transition-duration: .3s;
+}
+
+/* gmail */
+.containerThree:hover {
+    background-color: #EA4335;
+    transition-duration: .3s;
+}
+
+.socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+}
+
+.socialSvg {
+    width: 17px;
+}
+
+.socialSvg path {
+    fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* card-rules */
+.card-rules {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* card-preview */
+.card-preview {
+    padding: 10px;
+    height: 80%;
+}

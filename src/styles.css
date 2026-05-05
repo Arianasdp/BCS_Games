@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #020217;
+    margin: 0;
+}
+
+.navbar {
+    position: absolute;
+    inset: 0 0 auto 0;
+
+    padding: 0 40px;
+
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 40px;
+    height: 60px;
+
+    z-index: 10;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.navbar p{
+    color: #fff;
+}
+
+.navbar img{
+    height: 50px;
+}
+
+.cs-btn{
+    cursor: pointer;
+    background-color: #dd0faa;
+    border-style: none;
+    border-radius: 8px;
+    padding: 8px 30px;
+    color: #020105;
+
+    transition: 0.2s ease;
+}
+
+.navbar .cs-btn:hover {
+    background-color: #dd0faa42;
+    color: #fff;
+}
+
+.login-btn {
+    display: inline-block;
+    
+    background-color: #dd0faa;
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.navbar .login-btn{
+    padding: 8px 30px;
+    color: #020105;
+}
+
+.navbar .login-btn:hover {
+    background-color: #dd0faa42;
+    color: #fff;
+}
+
+.navbar a:hover {
+    background-color: #dd0faa42;
+}
