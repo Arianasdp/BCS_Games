@@ -40,25 +40,33 @@ p{
 }
 
 .hangman{
-    background-image: url("../../../../public/the-hangman-name.png");
+    background-image: url("../../../../public/assets/games/the-hangman.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .higher-lower{
-    background-image: url("../../../../public/higher-lower-name.png");
+    background-image: url("../../../../public/assets/games/higher-lower.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .trivia{
-    background-image: url("../../../../public/trivia-name.png");
+    background-image: url("../../../../public/assets/games/trivia.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.pinkbunny{
+    background-image: url("../../../../public/assets/games/pinkbunny.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 .ranking {
     background-color: white;
