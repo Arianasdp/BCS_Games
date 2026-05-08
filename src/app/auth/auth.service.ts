@@ -1,4 +1,4 @@
-import { Injectable, OnInit, Signal, WritableSignal, inject, signal } from '@angular/core';
+import { Injectable, OnInit, computed, WritableSignal, inject, signal } from '@angular/core';
 import { AuthResponse, createClient, SupabaseClient, User } from '@supabase/supabase-js';
 import { ILogin, IRegistro } from './auth.interfaces';
 import { Router } from '@angular/router';
@@ -82,4 +82,6 @@ export class AuthService {
     await this.supabase.auth.signOut();
     this.router.navigateByUrl('/auth/login');
   }
+
+  isLoggedIn = computed(() => this.usuarioActual() !== null);
 }
