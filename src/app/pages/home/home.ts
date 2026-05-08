@@ -1,10 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+
+export class Home {
+
+  ngAfterViewInit() {
+      new Swiper('.swiper', {
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        freeMode: true
+      });
+  }
+
+}

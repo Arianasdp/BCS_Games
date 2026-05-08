@@ -1,21 +1,103 @@
 <div class="page">
-    <div class="container">
-        <div>
-            <a class="preview hangman" routerLink="/games/hangman"></a>
-            <div class="ranking">Scores</div>
+    <div class="swiper">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+            <div class="game-card">
+                <div class="cover" routerLink="/games/hangman">
+                <img src="/assets/games/the-hangman.png" alt="The Hangman">
+
+                <div class="overlay">
+                    <h3>Instrucciones</h3>
+                    <p>
+                        Adiviná la palabra antes de quedarte sin intentos.
+                        Elegí letras una por una.
+                        Cada error agrega una parte al dibujo del ahorcado.
+                        Ganás si descubrís la palabra completa.
+                        Perdés si completás el dibujo antes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="scores">
+                <h3>Top Scores</h3>
+                <ul>
+                <li>1. Tulio - 999</li>
+                </ul>
+            </div>
+            </div>
+            </div>
+
+            <div class="swiper-slide">
+            <div class="game-card">
+                <div class="cover" routerLink="/games/higher-lower">
+                <img src="/assets/games/higher-lower.png" alt="Higher Lower" >
+                
+                <div class="overlay">
+                    <h3>Instrucciones</h3>
+                    <p>¿El próximo número será más alto o más bajo?
+                        Se muestra un valor inicial.
+                        Elegí “Higher” o “Lower”.
+                        Si acertás, seguís sumando puntos.
+                        El juego termina cuando fallás.
+                        “¿Cuántas rondas seguidas podés sobrevivir?”</p>
+                </div>
+            </div>
+            
+            <div class="scores">
+                <h3>Top Scores</h3>
+                <ul><li>1. Tulio - 999</li></ul>
+            </div>
+            </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="game-card">
+                    <div class="cover" routerLink="/games/trivia">
+                    <img src="/assets/games/trivia.png" alt="Trivia">
+                    
+                    <div class="overlay">
+                        <h3>Instrucciones</h3>
+                        <p>Demostrá cuánto sabés.
+                        Respondé preguntas de distintas categorías.
+                        Cada respuesta correcta suma puntos.
+                        Intentá conseguir la mayor puntuación posible.
+                        Algunas preguntas pueden tener límite de tiempo.</p>
+                    </div>
+                </div>
+                
+                <div class="scores">
+                    <h3>Top Scores</h3>
+                    <ul><li>1. Tulio - 999</li></ul>
+                </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="game-card">
+                    <div class="cover" routerLink="/games/pink-bunny">
+                    <img src="/assets/games/pinkbunny.jpeg" alt="Pink Bunny" >
+                    
+                    <div class="overlay">
+                        <h3>Instrucciones</h3>
+                        <p>Corré, esquivá obstáculos y sobreviví el mayor tiempo posible.
+                        Saltá para evitar obstáculos.
+                        Cuanto más tiempo sobrevivís, mayor es tu puntaje.
+                        El juego se vuelve más rápido con el tiempo.
+                        Si chocás, perdés.</p>
+                    </div>
+                </div>
+                
+                <div class="scores">
+                    <h3>Top Scores</h3>
+                    <ul><li>1. Tulio - 999</li></ul>
+                </div>
+                </div>
+            </div>
+
         </div>
-        <div>
-            <a class="preview trivia" routerLink="/games/trivia"></a>
-            <div class="ranking">Scores</div>
-        </div>
-        <div>
-            <a class="preview higher-lower" routerLink="/games/higher-lower"></a>
-            <div class="ranking">Scores</div>
-        </div>
-        <div>
-            <a class="preview pinkbunny" routerLink="/games/higher-lower"></a>
-            <div class="ranking">Scores</div>
-        </div>
+
     </div>
 </div>
 

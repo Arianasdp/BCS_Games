@@ -24,12 +24,6 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       const user = session?.user;
       this.usuarioActual.set(user ?? null);
-
-      if (user) {
-        this.router.navigateByUrl("");
-      } else {
-        this.router.navigateByUrl("/auth/login");
-      }
     });
   }
 
@@ -55,8 +49,10 @@ export class AuthService {
 
       return 'No se pudo registrar el usuario';
     }
-    
-      return null;
+
+    this.router.navigateByUrl('/home');
+
+    return null;
   }
 
   async loguear ({email, password} : ILogin):  Promise<string | null>  {
@@ -76,11 +72,14 @@ export class AuthService {
 
         return 'Error al iniciar sesión';
     }
+
+    this.router.navigateByUrl('/home');
     
       return null;
   }
 
   async cerrarSesion () {
     await this.supabase.auth.signOut();
+    this.router.navigateByUrl('/auth/login');
   }
 }

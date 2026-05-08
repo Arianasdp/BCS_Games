@@ -20,5 +20,10 @@ export const gameRoutes: Routes = [
         path: 'higher-lower',
         loadComponent: () =>
             import('./higher-lower/higher-lower').then((m) => m.HigherLower)
+    },
+    {
+        path: 'pink-bunny',
+        loadComponent: () =>
+            import('./pink-bunny/pink-bunny').then((m) => m.PinkBunny)
     }
 ]

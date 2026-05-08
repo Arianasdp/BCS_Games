@@ -9,16 +9,6 @@
 }
 
 .form {
-    /* width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 0.4em;
-    background-color: #100e1c;
-    border-radius: 25px;
-    transition: .4s ease-in-out; */
     width: 100%;
     display: flex;
     flex-direction: column;
