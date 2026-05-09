@@ -42,7 +42,8 @@
 .card-profile {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: #441951;
+    background-color: #36052d;
+    border: 1px solid rgba(255, 0, 170, 0.637);
 }
 
 .detalles {
@@ -93,7 +94,7 @@ p {
 .socialContainer {
     width: 30px;
     height: 30px;
-    background-color: #441951;
+    background-color: #36052d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,7 +155,12 @@ p {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background-color: #441951;
+    background-color: #36052d;
+    border: 1px solid rgba(255, 0, 170, 0.637);
+}
+
+.card-rules h3{
+    margin-bottom: 0;
 }
 
 /* card-preview */

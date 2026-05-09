@@ -2,6 +2,145 @@
     padding-top: 60px;
 }
 
-p{
+h2, p{
     color: #fff;
+}
+
+.game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.score {
+    position: absolute;
+
+    top: 10px;
+    left: 20px;
+}
+
+.hangman-scene {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.gallows {
+    width: 100%;
+    display: block;
+    border-radius: 16px;
+}
+
+.hangman {
+    position: absolute;
+
+    top: 123px;
+    left: 175px;
+
+    width: 120px;
+}
+
+.horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.word {
+    margin: 0 10px;
+    padding: 5px;
+}
+
+.keyboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.keyboard .letter-btn{
+    margin: 10px;
+    padding: 10px;
+    color: #fff;
+    background-color: #00000027;
+    border: 1px solid rgba(255, 0, 170, 0.637);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.keyboard .letter-btn:not(:disabled):hover {
+    background-color: #ce1ebf96;
+}
+
+.keyboard .letter-btn:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: gray;
+    color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.overlay {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0,0,0,0.7);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    padding: 30px;
+    text-align: center;
+    background: rgba(16, 14, 28, 0.6);
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reset-btn {
+    transition: .4s ease-in-out;
+    background-color: #dd0faa;
+    color: #020105;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.reset-btn:hover {
+    background-color: #dd0faa42;
+    color: #fff;
+}
+
+.round-transition{
+  position: fixed;
+  inset: 0;
+
+  background-color: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  color: white;
+
+  z-index: 999;
+
+  animation: fadeIn 0.3s;
 }

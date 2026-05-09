@@ -1,3 +1,43 @@
 <div class="page">
-    <p>hangman works!</p>
+    <div class="game-container">
+
+        <div class="hangman-scene">
+            <span class="score">
+                <p>Score: {{score}}</p>
+            </span>
+            <img class="gallows" src="assets/games/hangman/hb.jpeg" alt="Horca">
+            @if(wrongAttempts > 0) {
+                <img class="hangman" [src]="hangmanImages[wrongAttempts - 1]" alt="Hangman">
+            }
+        </div>
+
+        <div class="horizontal">
+            @for (letter of displayWord; track letter) {
+                    <div class="word">
+                        <p>{{ letter }}</p>
+                    </div> }
+        </div>
+
+        <div class="keyboard">
+            @for (letter of alphabet; track letter) {
+            <button (click)="guessLetter(letter)" [disabled]="guessedLetters.includes(letter)" class="letter-btn">
+                {{ letter }}
+            </button> }
+        </div>
+
+        @if(roundTransition){
+            <div class="round-transition">
+                NEXT ROUND
+            </div>
+        }
+
+        @if (gameOver) {
+
+            <div class="overlay">
+                <div class="popup">
+                    <h2>Game Over</h2>
+                    <button (click)="resetGame()" class="reset-btn"> Volver a jugar </button>
+                </div>
+            </div> }
+    </div>
 </div>
