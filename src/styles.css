@@ -5,6 +5,12 @@ body{
     margin: 0;
 }
 
+.navbar.day-mode a,
+.navbar.day-mode p {
+
+    color: black;
+}
+
 .navbar {
     position: absolute;
     inset: 0 0 auto 0;

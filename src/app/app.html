@@ -1,6 +1,15 @@
-<nav class="navbar">
+<nav class="navbar" [class.day-mode]="themeS.gameActive() && !themeS.isNight()">
   <div class="nav-left">
-    <img src="BCS-sfb.png" alt="BCS">
+    <img
+  [src]="
+    !themeS.gameActive()
+      ? 'BCS-sfb.png'
+      : themeS.isNight()
+        ? 'BCS-sfb.png'
+        : 'BCS-sfn.png'
+  "
+  alt="BCS"
+/>
   </div>
 
   <div class="nav-right">
