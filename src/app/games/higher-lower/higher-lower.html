@@ -1,3 +1,41 @@
 <div class="page">
-    <p>higher-lower works!</p>
+    <div class="card-container">
+
+        <img
+            class="card"
+            [src]="currentCard.image"
+            alt="current card"
+        />
+
+        </div>
+
+        <div class="controls">
+            <button (click)="guess('higher')" [disabled]="gameOver">
+                Higher
+            </button>
+            <button (click)="guess('lower')" [disabled]="gameOver">
+                Lower
+            </button>
+        </div>
+        <div class="deck">
+            <img [src]="deck" alt="deck"/>
+        </div>
+
+        @if (nextCard) {
+        <div class="next-card">
+            <img class="card" [src]="nextCard.image"/>
+        </div>
+        }
+
+        <div class="score">
+        <p>Score: {{ score }}</p>
+        </div>
+
+        @if (gameOver) {
+        <div class="overlay">
+            <div class="popup">
+                <p>Game Over</p>
+            <button (click)="resetGame()" class="reset-btn">Restart</button>
+            </div>
+        </div>}
 </div>
