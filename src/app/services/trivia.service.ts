@@ -8,8 +8,7 @@ import { ISimpsonsCharacter, Question, QuestionType } from './service.interface'
 export class TriviaService {
 
     simpsonsS= inject(Simpsons);
-    currentQuestion =
-    signal<Question | null>(null);
+    currentQuestion = signal<Question | null>(null);
 
     types: QuestionType[] = [
     'quoteToCharacter',
@@ -56,36 +55,73 @@ export class TriviaService {
     this.currentQuestion.set(question);
     }
 
-    getRandomCharacter(): ISimpsonsCharacter {
+    // getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
 
+    //     const characters = this.simpsonsS.characters();
+
+    //     return characters[
+    //         Math.floor(Math.random() * characters.length)
+    //     ];
+    // }
+
+    // getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
+    //     const characters = this.simpsonsS.characters();
+
+    //     const filtered = characters.filter(character => {
+    //         if (hasPhrase === undefined) return true;
+
+    //         if (hasPhrase) {
+    //         return character.phrases?.length > 0;
+    //         } else {
+    //         return !character.phrases || character.phrases.length === 0;
+    //         }
+    //     });
+
+    //     return filtered[
+    //         Math.floor(Math.random() * filtered.length)
+    //     ];
+    // }
+
+    getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
         const characters = this.simpsonsS.characters();
 
-        return characters[
-            Math.floor(Math.random() * characters.length)
+        const filtered = characters.filter(character => {
+            if (!hasPhrase) return true;
+
+            return (character.phrases?.length ?? 0) > 0;
+        });
+
+        return filtered[
+            Math.floor(Math.random() * filtered.length)
         ];
     }
 
-    getRandomCharacterNames(  cant: number, excludeName?: string): string[] {
-        
+    getRandomCharacterNames(cant: number, excludeName?: string, hasPhrase?: boolean): string[] {
+
         const characters = this.simpsonsS.characters();
+
+        const filtered = characters.filter(character => {
+            if (hasPhrase === undefined) return true;
+
+            return hasPhrase
+            ? (character.phrases?.length ?? 0) > 0
+            : true;
+        });
+
         const names: string[] = [];
 
-        while(names.length < cant) {
+        while (names.length < cant && filtered.length > 0) {
 
             const randomCharacter =
-            characters[Math.floor(Math.random() * characters.length)];
+            filtered[Math.floor(Math.random() * filtered.length)];
 
-            const randomName =
-            randomCharacter.name;
+            const randomName = randomCharacter.name;
 
-            const alreadyExists =
-            names.includes(randomName);
+            const alreadyExists = names.includes(randomName);
+            const isExcluded = randomName === excludeName;
 
-            const isExcluded =
-            randomName === excludeName;
-
-            if(!alreadyExists && !isExcluded) {
-                names.push(randomName);
+            if (!alreadyExists && !isExcluded) {
+            names.push(randomName);
             }
         }
 
@@ -122,10 +158,9 @@ export class TriviaService {
 
     generateQuoteToCharacterQuestion(): Question {
 
-        const correctCharacter = this.getRandomCharacter();
+        const correctCharacter = this.getRandomCharacter(true);
 
-        const wrongOptions =
-            this.getRandomCharacterNames(3, correctCharacter.name);
+        const wrongOptions = this.getRandomCharacterNames(3, correctCharacter.name, true);
 
         const options = [
             correctCharacter.name,
@@ -136,29 +171,13 @@ export class TriviaService {
 
             type: 'quoteToCharacter',
 
-            prompt: `Quién dijo esta frase:"${this.getRandomItem(correctCharacter.phrases)}"?`,
+            prompt: `Quién dijo esta frase:"${this.shuffle(correctCharacter.phrases)[0]}"` ,
 
             options: this.shuffle(options),
 
             correctAnswer:
             correctCharacter.name
         };
-    }
-
-    getRandomItem(array: string[]): string {
-
-        const validItems =
-            array.filter(item =>
-            item &&
-            item.trim() !== ''
-            );
-
-        return validItems[
-            Math.floor(
-            Math.random() * validItems.length
-            )
-        ];
-
     }
 
     getRandomPhrases(cant: number, excludeName?: string) {
@@ -170,11 +189,11 @@ export class TriviaService {
 
             const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
 
-            const randomPhrase = this.getRandomItem(randomCharacter.phrases);
+            const randomPhrase =  this.shuffle(randomCharacter.phrases)[0];
 
             const isExcluded = randomCharacter.name === excludeName;
 
-            if(!isExcluded) {
+            if(!isExcluded && randomPhrase) {
                 phrases.push(randomPhrase);
             }
         }
@@ -186,9 +205,9 @@ export class TriviaService {
 
     generateCharacterToQuoteQuestion(): Question {
 
-        const correctCharacter = this.getRandomCharacter();
+        const correctCharacter = this.getRandomCharacter(true);
 
-        const correctOption = this.getRandomItem(correctCharacter.phrases);
+        const correctOption = this.shuffle(correctCharacter.phrases)[0];
 
         const wrongOptions = this.getRandomPhrases(3, correctCharacter.name);
 
@@ -213,7 +232,7 @@ export class TriviaService {
 
         const correctCharacter = this.getRandomCharacter();
 
-        const wrongOptions = this.getRandomCharacterNames(3);
+        const wrongOptions = this.getRandomCharacterNames(3, correctCharacter.name);
 
         const options = [
             correctCharacter.name,

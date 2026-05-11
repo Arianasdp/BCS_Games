@@ -1,5 +1,17 @@
-.page{
-    padding-top: 60px;
+.page {
+    /* padding-top: 60px; */
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+
+    background-image: url("/assets/games/trivia/fondo-trivia.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .score-bar {
@@ -13,11 +25,16 @@
 
     border-radius: 999px;
 
-    background: #36052d;
-    border: 1px solid rgba(255, 0, 170, 0.637);
+    background: rgba(16, 14, 28, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
 
     font-weight: bold;
+}
+
+h2 {
+    color: #fff;
 }
 
 .quiz-container {
@@ -32,9 +49,11 @@
     width: 100%;
     max-width: 600px;
 
-    background: #36052d;
-    border: 1px solid rgba(255, 0, 170, 0.637);
+    background: rgba(16, 14, 28, 0.6);
+    backdrop-filter: blur(10px);
+
     border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1rem;
 
     display: flex;
@@ -69,15 +88,15 @@
     padding: 1rem;
     border: none;
     border-radius: 10px;
-    background-color: #f330cf91;
-    color: #fff;
+    background-color: #dd0faa;
+    color: #020105;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .option-button:hover {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #dd0faa42;
+    color: #fff;
     transform: scale(1.01);
 }
