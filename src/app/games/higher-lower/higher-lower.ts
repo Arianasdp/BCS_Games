@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
-
-type Card = {
-  
-  value: number;
-  suit: string;
-  image: string;
-  isJoker?: boolean;
-}
-
+import { ICard } from '../game.interfaces';
 
 @Component({
   selector: 'app-higher-lower',
@@ -19,9 +11,9 @@ export class HigherLower {
 
 deck?: string;
 
-cards: Card[] = [];
-currentCard!: Card;
-nextCard!: Card;
+cards: ICard[] = [];
+currentCard!: ICard;
+nextCard!: ICard;
 
 score = 0;
 gameOver = false;
@@ -66,7 +58,7 @@ generateDeck() {
     this.startGame();
   }
 
-  shuffle(array: Card[]) {
+  shuffle(array: ICard[]) {
 
     for (let i = array.length - 1; i > 0; i--) {
 

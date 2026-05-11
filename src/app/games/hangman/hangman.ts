@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-hangman',
@@ -38,7 +37,7 @@ export class Hangman {
 
   gameOver = false;
 
-  score = 0
+  score = 0;
 
   roundTransition: boolean = false;
 

@@ -1,36 +1,6 @@
 import { Component,  ElementRef, ViewChild, AfterViewInit, HostListener, inject } from '@angular/core';
 import { Theme } from '../../services/theme';
-
-
-type Player = {
-
-  x: number;
-  y: number;
-
-  width: number;
-  height: number;
-
-  velocityY: number;
-
-  jumpCount: number;
-
-  jumpsLeft: number;
-
-  runSprites: HTMLImageElement[];
-
-  jumpSprite: HTMLImageElement;
-}
-
-type Obstacle = {
-
-  x: number;
-  y: number;
-
-  width: number;
-  height: number;
-
-  sprite: HTMLImageElement;
-}
+import { IPlayer, IObstacle} from '../game.interfaces';
 
 @Component({
   standalone: true,
@@ -68,7 +38,7 @@ export class PinkBunny implements AfterViewInit {
   gameStarted = false;
   gameOver = false;
 
-  player!: Player;
+  player!: IPlayer;
 
   y = 120;
 
@@ -102,7 +72,7 @@ export class PinkBunny implements AfterViewInit {
   obstacleM: HTMLImageElement  = new Image();
   obstacleL: HTMLImageElement  = new Image();
 
-    obstacles: Obstacle[] = [];
+    obstacles: IObstacle[] = [];
 
     obstacleSprites: HTMLImageElement[] = [];
 

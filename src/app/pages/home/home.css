@@ -42,7 +42,7 @@ h3, p, li {
     transform: scale(1.05);
 }
 
-.overlay {
+.overlay-home {
     position: absolute;
     inset: 0;
 
@@ -60,7 +60,7 @@ h3, p, li {
     cursor: pointer;
 }
 
-.cover:hover .overlay {
+.cover:hover .overlay-home {
     opacity: 1;
 }
 

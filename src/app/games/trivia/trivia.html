@@ -1,3 +1,45 @@
 <div class="page">
-    <p>trivia works!</p>
+
+    <div class="quiz-container">
+
+        <div class="score-bar">
+            <p>Score: {{ score }}</p>
+        </div>
+
+        <div class="question-card">
+            @if(triviaS.currentQuestion(); as question) {
+
+            <h2 class="question-text">
+                {{ question.prompt }}
+            </h2>
+
+            @if(question.image) {
+
+                <img class="question-image" [src]="question.image" alt="character"/>
+            }
+
+            <div class="options">
+
+                @for(option of question.options; track option) {
+
+                <button class="option-button" (click)="answer(option)">
+                    {{ option }}
+                </button>}
+            </div>
+            }
+        </div>
+    </div>
+
+    @if(roundTransition) {
+        <div class="round-transition">
+                NEXT ROUND
+        </div>
+    }
+    @if (gameOver) {
+        <div class="overlay">
+            <div class="popup">
+                <h2>Game Over</h2>
+                    <button (click)="resetGame()" class="reset-btn"> Volver a jugar </button>
+                </div>
+        </div> }
 </div>
