@@ -25,5 +25,9 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./games/game.routes').then(m => m.gameRoutes),
         canActivate: [estaLogueadoGuard]
+    },
+    {
+        path: "**",
+        loadComponent: () => import('./pages/error-page/error-page').then((m) => m.ErrorPage)//siempre va al final, es el último caso a evaluar, si no entra a las anteriores, entra a este. Pero si se declara antes, va a frenar ahí, tipo: home, **, login y le ponés login y no lo reconoce porque frenó en el comodín (**)
     }
 ];
