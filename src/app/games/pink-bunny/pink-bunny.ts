@@ -1,6 +1,8 @@
 import { Component,  ElementRef, ViewChild, AfterViewInit, HostListener, inject } from '@angular/core';
 import { Theme } from '../../services/theme';
 import { IPlayer, IObstacle} from '../game.interfaces';
+import { ScoreService } from '../../services/score.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   standalone: true,
@@ -11,6 +13,8 @@ import { IPlayer, IObstacle} from '../game.interfaces';
 })
 export class PinkBunny implements AfterViewInit {
 
+  authS = inject(AuthService);
+  scoreS = inject(ScoreService);
   themeS = inject(Theme);
 
   ngOnInit() {
@@ -344,6 +348,8 @@ export class PinkBunny implements AfterViewInit {
 
         this.gameStarted = false;
         this.gameOver = true;
+
+        this.scoreS.insertarPinkBunny(this.authS.usuarioActual()?.user_metadata?.['nombre'], Math.floor(this.score));
       }
     }
   }

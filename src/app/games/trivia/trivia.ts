@@ -1,5 +1,7 @@
-import { Component, inject, signal, ChangeDetectorRef, effect } from '@angular/core';
+import { Component, inject, signal, ChangeDetectorRef} from '@angular/core';
 import { TriviaService } from '../../services/trivia.service';
+import { ScoreService } from '../../services/score.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-trivia',
@@ -9,11 +11,14 @@ import { TriviaService } from '../../services/trivia.service';
 })
 export class Trivia {
 
+  authS = inject(AuthService);
+  scoreS = inject(ScoreService);
   triviaS = inject(TriviaService);
 
   cdr = inject(ChangeDetectorRef);
 
   score = 0;
+  correct_answers = 0;
 
   gameOver = false;
 
@@ -35,6 +40,7 @@ export class Trivia {
     if(option === question.correctAnswer) {
 
       this.score += 100;
+      this.correct_answers++;
 
       this.roundTransition = true;
 
@@ -49,6 +55,7 @@ export class Trivia {
     }
     else {
       this.gameOver = true;
+      this.scoreS.insertarTrivia(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.correct_answers, this.score);
 
     }
   }
@@ -56,6 +63,7 @@ export class Trivia {
   resetGame() {
 
     this.score = 0;
+    this.correct_answers = 0;
 
     this.gameOver = false;
 

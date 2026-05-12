@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ICard } from '../game.interfaces';
+import { ScoreService } from '../../services/score.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-higher-lower',
@@ -9,18 +11,22 @@ import { ICard } from '../game.interfaces';
 })
 export class HigherLower {
 
-deck?: string;
+  authS = inject(AuthService);
+  scoreS = inject(ScoreService);
 
-cards: ICard[] = [];
-currentCard!: ICard;
-nextCard!: ICard;
+  deck?: string;
 
-score = 0;
-gameOver = false;
-roundResult: 'win' | 'lose' | null = null;
+  cards: ICard[] = [];
+  currentCard!: ICard;
+  nextCard!: ICard;
+  correct_cards = 0;
 
-generateDeck() {
+  score = 0;
+  gameOver = false;
+  roundResult: 'win' | 'lose' | null = null;
 
+  generateDeck() {
+    
     const suits = ['c', 'd', 't', 'p'];
 
     for (let suit of suits) {
@@ -99,6 +105,7 @@ generateDeck() {
 
     if (isJoker) {
       this.score += 200;
+      this.correct_cards++;
       this.advanceRound(true);
       return;
     }
@@ -110,36 +117,39 @@ generateDeck() {
 
     if (correct) {
       this.score += 10;
+      this.correct_cards++;
       this.advanceRound(true);
     } else {
       this.gameOver = true;
+      this.scoreS.insertarHigherLower(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.correct_cards, this.score);
     }
 
   }
 
   advanceRound(win: boolean) {
 
-  this.roundResult = win ? 'win' : 'lose';
+    this.roundResult = win ? 'win' : 'lose';
 
-  setTimeout(() => {
+    setTimeout(() => {
 
-    this.currentCard = this.nextCard;
-    this.nextCard = null as any;
+      this.currentCard = this.nextCard;
+      this.nextCard = null as any;
+      this.roundResult = null;
+
+    }, 800);
+  }
+
+  resetGame() {
+
+    this.cards = [];
+    this.score = 0;
+    this.correct_cards = 0;
+    this.gameOver = false;
     this.roundResult = null;
+    this.currentCard = null as any;
+    this.nextCard = null as any;
 
-  }, 800);
-}
-
-resetGame() {
-
-  this.cards = [];
-  this.score = 0;
-  this.gameOver = false;
-  this.roundResult = null;
-  this.currentCard = null as any;
-  this.nextCard = null as any;
-
-  this.startGame();
-}
+    this.startGame();
+  }
 
 }

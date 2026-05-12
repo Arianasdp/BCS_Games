@@ -22,9 +22,9 @@
 
             <div class="scores">
                 <h3>Top Scores</h3>
-                <ul>
-                <li>1. Tulio - 999</li>
-                </ul>
+                @for(score of hangmanS(); track $index) {
+                <p>{{score.name}} - {{score.score}}</p>
+                }
             </div>
             </div>
             </div>
@@ -48,7 +48,9 @@
             
             <div class="scores">
                 <h3>Top Scores</h3>
-                <ul><li>1. Tulio - 999</li></ul>
+                @for(score of higherLowerS(); track $index) {
+                <p>{{score.name}} - {{score.score}}</p>
+                }
             </div>
             </div>
             </div>
@@ -69,7 +71,9 @@
                 
                 <div class="scores">
                     <h3>Top Scores</h3>
-                    <ul><li>1. Tulio - 999</li></ul>
+                    @for(score of triviaS(); track $index) {
+                    <p>{{score.name}} - {{score.score}}</p>
+                    }
                 </div>
                 </div>
             </div>
@@ -91,7 +95,9 @@
                 
                 <div class="scores">
                     <h3>Top Scores</h3>
-                    <ul><li>1. Tulio - 999</li></ul>
+                    @for(score of pinkBunnyS(); track $index) {
+                    <p>{{score.name}} - {{score.score}}</p>
+                    }
                 </div>
                 </div>
             </div>

@@ -71,6 +71,27 @@ h3, p, li {
 
     border: 1px solid rgba(255, 0, 170, 0.637);
     border-radius: 16px;
+    overflow-y: auto;
+}
+.scores::-webkit-scrollbar{
+    width: 10px;
+}
+
+/* fondo */
+.scores::-webkit-scrollbar-track{
+    background: rgba(255, 0, 170, 0.637);
+    border-radius: 10px;
+}
+
+/* barra que se mueve */
+.scores::-webkit-scrollbar-thumb{
+    background: #000000;
+    border-radius: 10px;
+}
+
+/* hover */
+.score::-webkit-scrollbar-thumb:hover{
+    background: #ebeaea;
 }
 
 .swiper {

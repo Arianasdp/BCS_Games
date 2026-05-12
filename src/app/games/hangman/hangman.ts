@@ -1,4 +1,6 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import { ScoreService } from '../../services/score.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-hangman',
@@ -8,7 +10,14 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 })
 export class Hangman {
 
+  authS = inject(AuthService);
+  scoreS = inject(ScoreService);
+
   constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.game_start = Date.now();
+  }
 
   words = [
     'CAT',
@@ -39,6 +48,14 @@ export class Hangman {
 
   score = 0;
 
+  letters_selected = 0;
+
+  game_duration = 0;
+
+  game_start!: number;
+
+  game_end!: number;
+
   roundTransition: boolean = false;
 
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -66,6 +83,8 @@ export class Hangman {
     if (this.gameOver) return;
 
     this.guessedLetters.push(letter);
+
+    this.letters_selected++;
 
     if (this.word.includes(letter)) {
       const occurrences = this.word.split('').filter(l => l === letter).length;
@@ -98,6 +117,10 @@ export class Hangman {
 
     if (this.wrongAttempts >= this.maxAttempts) {
       this.gameOver = true;
+      this.game_end = Date.now();
+      this.game_duration = Math.floor((this.game_end - this.game_start) / 1000);
+
+      this.scoreS.insertarHangman(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.letters_selected, this.game_duration, this.score);
     }
   }
 
@@ -116,6 +139,9 @@ export class Hangman {
   resetGame() {
 
     this.score = 0;
+    this.letters_selected = 0;
+
+    this.game_start = Date.now();
 
     this.resetRound();
   }

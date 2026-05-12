@@ -20,7 +20,7 @@
 
             <div class="options">
 
-                @for(option of question.options; track option) {
+                @for(option of question.options; track $index) {
 
                 <button class="option-button" (click)="answer(option)">
                     {{ option }}
