@@ -94,8 +94,6 @@ export class HigherLower {
       return;
     }
 
-    this.nextCard = next;
-
     if (this.cards.length === 0) {
       this.generateDeck();
       this.shuffle(this.cards);
@@ -103,27 +101,34 @@ export class HigherLower {
 
     const isJoker = next.isJoker || this.currentCard.isJoker;
 
+    let correct = false;
+
     if (isJoker) {
-      this.score += 200;
+      this.score += 100;
       this.correct_cards++;
-      this.advanceRound(true);
-      return;
+      correct = true;
+    }else{
+      correct =
+      direction === 'higher'
+        ? next.value >= this.currentCard.value
+        : next.value <= this.currentCard.value;
+
+        if (correct) {
+          this.score += 10;
+          this.correct_cards++;
+        }
     }
 
-    const correct =
-      direction === 'higher'
-        ? this.nextCard.value >= this.currentCard.value
-        : this.nextCard.value <= this.currentCard.value;
+    if (correct) {
+      this.currentCard = next;
+    }
 
     if (correct) {
-      this.score += 10;
-      this.correct_cards++;
       this.advanceRound(true);
     } else {
       this.gameOver = true;
       this.scoreS.insertarHigherLower(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.correct_cards, this.score);
     }
-
   }
 
   advanceRound(win: boolean) {
@@ -131,9 +136,6 @@ export class HigherLower {
     this.roundResult = win ? 'win' : 'lose';
 
     setTimeout(() => {
-
-      this.currentCard = this.nextCard;
-      this.nextCard = null as any;
       this.roundResult = null;
 
     }, 800);

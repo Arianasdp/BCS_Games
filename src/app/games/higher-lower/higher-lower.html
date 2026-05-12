@@ -1,5 +1,5 @@
 <div class="page">
-    <div class="card-container">
+    <!-- <div class="card-container">
 
         <img
             class="card"
@@ -11,10 +11,10 @@
 
         <div class="controls">
             <button (click)="guess('higher')" [disabled]="gameOver">
-                Higher
+                ▲
             </button>
             <button (click)="guess('lower')" [disabled]="gameOver">
-                Lower
+                ▼
             </button>
         </div>
         <div class="deck">
@@ -25,6 +25,28 @@
         <div class="next-card">
             <img class="card" [src]="nextCard.image"/>
         </div>
+        } -->
+        <div class="cards-row">
+    
+            <div class="card-container">
+                <img class="card" [src]="currentCard.image" />
+            </div>
+
+            <div class="deck">
+                <img class="card" [src]="deck" />
+            </div>
+
+        </div>
+
+        <div class="controls">
+            <button (click)="guess('higher')" [disabled]="gameOver">▲</button>
+            <button (click)="guess('lower')" [disabled]="gameOver">▼</button>
+        </div>
+
+        @if (nextCard) {
+            <div class="next-card">
+                <img class="card" [src]="nextCard.image" />
+            </div>
         }
 
         <div class="score">
