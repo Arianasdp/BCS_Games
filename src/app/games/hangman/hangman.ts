@@ -119,6 +119,7 @@ export class Hangman {
     }
 
     if (this.wrongAttempts >= this.maxAttempts) {
+      this.audioS.play('gameOver');
       this.gameOver = true;
       this.game_end = Date.now();
       this.game_duration = Math.floor((this.game_end - this.game_start) / 1000);
