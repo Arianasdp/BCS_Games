@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { ScoreService } from '../../services/score.service';
 import { AuthService } from '../../auth/auth.service';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   selector: 'app-hangman',
@@ -12,6 +13,7 @@ export class Hangman {
 
   authS = inject(AuthService);
   scoreS = inject(ScoreService);
+  audioS = inject(AudioService);
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -104,6 +106,7 @@ export class Hangman {
       this.guessedLetters.includes(letter));
 
     if (won) {
+      this.audioS.play('right');
       this.score += 100;
 
       this.roundTransition = true;

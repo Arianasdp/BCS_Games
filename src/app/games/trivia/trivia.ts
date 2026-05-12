@@ -2,6 +2,7 @@ import { Component, inject, signal, ChangeDetectorRef} from '@angular/core';
 import { TriviaService } from '../../services/trivia.service';
 import { ScoreService } from '../../services/score.service';
 import { AuthService } from '../../auth/auth.service';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   selector: 'app-trivia',
@@ -14,6 +15,7 @@ export class Trivia {
   authS = inject(AuthService);
   scoreS = inject(ScoreService);
   triviaS = inject(TriviaService);
+  audioS = inject(AudioService);
 
   cdr = inject(ChangeDetectorRef);
 
@@ -39,6 +41,8 @@ export class Trivia {
 
     if(option === question.correctAnswer) {
 
+      this.audioS.play('right');
+
       this.score += 100;
       this.correct_answers++;
 
@@ -54,6 +58,7 @@ export class Trivia {
 
     }
     else {
+      this.audioS.play('wrong');
       this.gameOver = true;
       this.scoreS.insertarTrivia(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.correct_answers, this.score);
 

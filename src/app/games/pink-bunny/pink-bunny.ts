@@ -3,6 +3,7 @@ import { Theme } from '../../services/theme';
 import { IPlayer, IObstacle} from '../game.interfaces';
 import { ScoreService } from '../../services/score.service';
 import { AuthService } from '../../auth/auth.service';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ export class PinkBunny implements AfterViewInit {
   authS = inject(AuthService);
   scoreS = inject(ScoreService);
   themeS = inject(Theme);
+  audioS = inject(AudioService);
 
   ngOnInit() {
 
@@ -272,6 +274,8 @@ export class PinkBunny implements AfterViewInit {
 
       if(this.player.jumpCount < 2) {
 
+      this.audioS.play('jump');
+
       this.player.velocityY = -15;
 
       this.player.jumpCount++;
@@ -343,6 +347,8 @@ export class PinkBunny implements AfterViewInit {
         playerBottom > obstacleTop;
 
       if(collision) {
+
+        this.audioS.play('gameOver');
 
         console.log('GAME OVER');
 

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ICard } from '../game.interfaces';
 import { ScoreService } from '../../services/score.service';
 import { AuthService } from '../../auth/auth.service';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   selector: 'app-higher-lower',
@@ -13,6 +14,7 @@ export class HigherLower {
 
   authS = inject(AuthService);
   scoreS = inject(ScoreService);
+  audioS = inject(AudioService);
 
   deck?: string;
 
@@ -126,6 +128,7 @@ export class HigherLower {
     if (correct) {
       this.advanceRound(true);
     } else {
+      this.audioS.play('gameOver');
       this.gameOver = true;
       this.scoreS.insertarHigherLower(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.correct_cards, this.score);
     }
