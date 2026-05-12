@@ -11,21 +11,8 @@ export class ChatService {
     canal: RealtimeChannel;
 
     constructor() {
-        this.canal = this.supabaseS.supabase.channel('tabla-db-changes');
-
-        const definicion = this.canal.on(
-            'postgres_changes',
-            {
-                event: 'INSERT',
-                schema: 'public',
-                table: 'mensajes'
-            },
-            (data) => {
-                console.log(data);
-            },
-        );
-
-        const suscripcion = definicion.subscribe();
+        this.canal = this.supabaseS.supabase
+        .channel('tabla-db-changes');
     }
 
     async traer() {
