@@ -9,7 +9,7 @@
         <h3>BCS' Chat</h3>
     </div>
 
-    <div class="chat-messages">
+    <div class="chat-messages" #chatBox>
 
         @for(msg of mensajes(); track msg.id){
             @if(msg.usuario !== authS.usuarioActual()?.user_metadata?.['nombre']){

@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { ChatService } from '../../services/chat.service';
 import { IMensaje } from '../../services/service.interface';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { afterNextRender } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -18,10 +19,14 @@ export class Chat implements OnInit{
   chatS = inject(ChatService);
   mensajes: WritableSignal<IMensaje[]> = signal([]);
 
+  @ViewChild('chatBox')
+  chatBox!: ElementRef<HTMLDivElement>;
+
   contenido: string = '';
 
   async ngOnInit(): Promise<void> {
     const data = (await this.chatS.traer()) as IMensaje[];
+    this.scrollToBottom();
 
     this.mensajes.set(data);
 
@@ -51,6 +56,7 @@ export class Chat implements OnInit{
     this.chatS.insertar(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.contenido);
     
     this.contenido = '';
+    this.scrollToBottom();
   }
   
   isOpen = false;
@@ -58,4 +64,12 @@ export class Chat implements OnInit{
   toggleChat() {
     this.isOpen = !this.isOpen;
   }
+
+  scrollToBottom() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const el = this.chatBox.nativeElement;
+      el.scrollTop = el.scrollHeight;
+    });
+  });}
 }
