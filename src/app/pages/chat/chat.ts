@@ -24,6 +24,23 @@ export class Chat implements OnInit{
     const data = (await this.chatS.traer()) as IMensaje[];
 
     this.mensajes.set(data);
+
+    this.chatS.canal.on(
+            'postgres_changes',
+            {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'mensajes'
+            },
+            (data) => {
+                console.log(data);
+                const mensajesNew = [...this.mensajes(), data.new as IMensaje];
+
+                // mensajesNew.push(data.new as IMensaje);
+
+                this.mensajes.set(mensajesNew);
+            },
+        ).subscribe();
   }
 
   enviar() {

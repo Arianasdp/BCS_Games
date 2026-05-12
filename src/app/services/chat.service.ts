@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
+import { RealtimeChannel } from '@supabase/supabase-js';
 
 @Injectable({
     providedIn: 'root',
@@ -7,6 +8,25 @@ import { SupabaseService } from './supabase.service';
 export class ChatService {
 
     supabaseS = inject(SupabaseService);
+    canal: RealtimeChannel;
+
+    constructor() {
+        this.canal = this.supabaseS.supabase.channel('tabla-db-changes');
+
+        const definicion = this.canal.on(
+            'postgres_changes',
+            {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'mensajes'
+            },
+            (data) => {
+                console.log(data);
+            },
+        );
+
+        const suscripcion = definicion.subscribe();
+    }
 
     async traer() {
         const response = await this.supabaseS.supabase.from("mensajes").select("*");
