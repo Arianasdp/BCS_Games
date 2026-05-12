@@ -85,14 +85,10 @@ h3, p, li {
 
 /* barra que se mueve */
 .scores::-webkit-scrollbar-thumb{
-    background: #000000;
+    background: #000000ea;
     border-radius: 10px;
 }
 
-/* hover */
-.score::-webkit-scrollbar-thumb:hover{
-    background: #ebeaea;
-}
 
 .swiper {
     width: 100%;
