@@ -5,6 +5,71 @@
 @if(isOpen){
 <div class="chat-window">
     
-        <p>mensaje</p>  
-    
+        <div class="chat-header">
+        <h3>BCS' Chat</h3>
+    </div>
+
+    <div class="chat-messages">
+
+        @for(msg of mensajes(); track msg.id){
+            @if(msg.usuario !== authS.usuarioActual()?.user_metadata?.['nombre']){
+
+                <div class="message other">
+
+                    <div class="message-info">
+                        <span class="message-user">
+                            {{msg.usuario}}
+                        </span>
+
+                        <span class="message-date">
+                            {{msg.created_at | date:'dd/MM/yyyy HH:mm'}}
+                        </span>
+                    </div>
+
+                    <div class="message-content">
+                        {{msg.contenido}}
+                    </div>
+
+                </div>
+            }
+            @else {
+
+                <div class="message me">
+
+                    <div class="message-info">
+                        <span class="message-date">
+                            {{msg.created_at | date:'dd/MM/yyyy HH:mm'}}
+                        </span>
+                        <span class="message-user">
+                            Vos
+                        </span>
+                    </div>
+
+                    <div class="message-content">
+                        {{msg.contenido}}
+                    </div>
+
+                </div>
+            }
+
+        }
+
+    </div>
+
+    @if(authS.usuarioActual()){
+
+    <div class="chat-input">
+
+        <input name="mensaje" placeholder="Escribí un mensaje..."
+            [(ngModel)]="contenido" (keydown.enter)="enviar()">
+
+        <button (click)="enviar()">
+            Enviar
+        </button>
+
+    </div>}
+    @else {
+        <div class="chat-login-warning">
+            Iniciá sesión para enviar mensajes.
+        </div>}
 </div>}

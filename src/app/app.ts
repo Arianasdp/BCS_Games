@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { Chat } from './pages/chat/chat';
 import { Theme } from './services/theme';
@@ -13,6 +13,7 @@ import { Theme } from './services/theme';
 export class App {
   authS = inject(AuthService);
   themeS = inject(Theme);
+  router = inject(Router);
   
   protected readonly title = signal('BCS-games');
 }

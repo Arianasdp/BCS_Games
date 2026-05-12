@@ -26,7 +26,12 @@
     }
   </div>
 </nav>
+@if(
+  router.url !== '/auth/login' &&
+  router.url !== '/auth/registro'
+){
 <app-chat></app-chat>
+}
 <router-outlet />
 
 

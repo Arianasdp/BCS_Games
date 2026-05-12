@@ -1,13 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { ChatService } from '../../services/chat.service';
+import { IMensaje } from '../../services/service.interface';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-chat',
-  imports: [],
+  imports: [FormsModule, DatePipe],
   templateUrl: './chat.html',
   styleUrl: './chat.css',
 })
-export class Chat {
+export class Chat implements OnInit{
+  
+  authS = inject(AuthService);
+  chatS = inject(ChatService);
+  mensajes: WritableSignal<IMensaje[]> = signal([]);
+
+  contenido: string = '';
+
+  async ngOnInit(): Promise<void> {
+    const data = (await this.chatS.traer()) as IMensaje[];
+
+    this.mensajes.set(data);
+  }
+
+  enviar() {
+    this.chatS.insertar(this.authS.usuarioActual()?.user_metadata?.['nombre'], this.contenido);
+    
+    this.contenido = '';
+  }
+  
   isOpen = false;
 
   toggleChat() {
