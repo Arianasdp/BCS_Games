@@ -55,33 +55,6 @@ export class TriviaService {
     this.currentQuestion.set(question);
     }
 
-    // getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
-
-    //     const characters = this.simpsonsS.characters();
-
-    //     return characters[
-    //         Math.floor(Math.random() * characters.length)
-    //     ];
-    // }
-
-    // getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
-    //     const characters = this.simpsonsS.characters();
-
-    //     const filtered = characters.filter(character => {
-    //         if (hasPhrase === undefined) return true;
-
-    //         if (hasPhrase) {
-    //         return character.phrases?.length > 0;
-    //         } else {
-    //         return !character.phrases || character.phrases.length === 0;
-    //         }
-    //     });
-
-    //     return filtered[
-    //         Math.floor(Math.random() * filtered.length)
-    //     ];
-    // }
-
     getRandomCharacter(hasPhrase?: boolean): ISimpsonsCharacter {
         const characters = this.simpsonsS.characters();
 

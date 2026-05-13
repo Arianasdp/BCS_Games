@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { estaLogueadoGuard } from './guards/esta-logueado-guard';
+import { authVerificationGuard } from './guards/auth-verification-guard';
 
 export const routes: Routes = [
     {
@@ -18,7 +19,8 @@ export const routes: Routes = [
     {
         path: 'auth',
         loadChildren: () =>
-            import('./auth/auth.routes').then(m => m.authRoutes)
+            import('./auth/auth.routes').then(m => m.authRoutes),
+        canActivate: [authVerificationGuard]
     },
     {
         path: 'games',
